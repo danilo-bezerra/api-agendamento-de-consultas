@@ -49,7 +49,7 @@ public class Doctor implements Serializable {
 	private Address address;
 	
 	@OneToMany(mappedBy = "doctor")
-    Set<Scheduling> schedules;
+    Set<Appointment> appointment;
 
 	
 	public Doctor(DoctorRegisterRecord obj, Address address) {

@@ -15,18 +15,23 @@ public class PatientService {
 	@Autowired
 	private PatientRepository repository;
 	
+	@Autowired
+	private AddressService addressService;
+	
 	public void create(Patient obj) {
+		addressService.create(obj.getAddress());
 		repository.save(obj);
 	}
 	
-	public void update(Long id, PatientUpdateRecord data) {
-		var obj = repository.getReferenceById(id);
+	public Patient update(Long id, PatientUpdateRecord data) {
+		Patient obj = repository.getReferenceById(id);
 		obj.updateFields(data);
+		return obj;
 	}
 	
-	public void findById(Long id) {
-		var obj = repository.getReferenceById(id);
-		System.out.println(obj);
+	public Patient findById(Long id) {
+		Patient obj = repository.getReferenceById(id);
+		return obj;
 	}
 	
 	public Page<PatientListRecord> findAll(Pageable pagination) {

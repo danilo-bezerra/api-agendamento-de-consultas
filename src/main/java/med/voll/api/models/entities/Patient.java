@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,15 +50,16 @@ public class Patient implements Serializable {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
 	private Address address;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "patient")
-    Set<Scheduling> schedules;
+    Set<Appointment> appointment;
 	
-	public Patient(@Valid PatientCreateRecord obj, Address address) {
+	public Patient(@Valid PatientCreateRecord obj) {
 		this.name = obj.name();
 		this.email = obj.email();
 		this.phone = obj.phone();
 		this.cpf = obj.cpf();
-		this.address = address;
+		this.address = new Address(obj.address());
 		this.active = true;
 	}
 	

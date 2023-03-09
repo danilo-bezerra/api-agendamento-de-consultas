@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,9 +41,11 @@ public class Address implements Serializable {
 	private String number;
 	private String complement;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy = "address")
 	private Patient patient;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy = "address")
 	private Doctor doctor;
 	
