@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.models.enums.Specialty;
-import med.voll.api.models.records.DoctorRegisterRecord;
+import med.voll.api.models.records.CreateDoctorDTO;
 import med.voll.api.models.records.DoctorUpdateRecord;
 
 @Entity
@@ -52,14 +52,14 @@ public class Doctor implements Serializable {
     Set<Appointment> appointment;
 
 	
-	public Doctor(DoctorRegisterRecord obj, Address address) {
+	public Doctor(CreateDoctorDTO obj) {
 		this.name = obj.name();
 		this.crm = obj.crm();
 		this.email = obj.email();
 		this.phone = obj.phone();
 		this.active = true;
 		this.specialty = obj.specialty();
-		this.address = address;		
+		this.address = new Address(obj.address());		
 	}
 
 
